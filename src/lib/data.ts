@@ -235,7 +235,7 @@ export const socialLinks: SocialLink[] = [
 export const contactInfo = {
   phone: '+18325267055',
   email: 'info@magicbraiding.com',
-  address: '9711 Mason Rd, Richmond, TX 77407',
+  address: 'Richmond Texas 77407',
   location: 'Magic Braiding',
   hours: businessHours,
 };

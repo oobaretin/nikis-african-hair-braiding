@@ -150,6 +150,7 @@ export const Footer: React.FC = () => {
               <div>
                 <p className="text-secondary-300 text-sm">Address</p>
                 <p className="text-white">{contactInfo.address}</p>
+                <p className="text-secondary-400 text-xs mt-1">Call or text for exact location</p>
               </div>
             </div>
           </div>

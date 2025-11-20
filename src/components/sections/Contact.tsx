@@ -213,9 +213,9 @@ export const Contact: React.FC = () => {
                 <div>
                   <h4 className="font-semibold text-lg text-secondary-900 mb-1">Address</h4>
                   <p className="text-secondary-600">{contactInfo.address}</p>
-                  {contactInfo.location && (
-                    <p className="text-secondary-500 text-sm mt-1">{contactInfo.location}</p>
-                  )}
+                  <p className="text-secondary-500 text-sm mt-2 font-medium">
+                    Please call or text for exact location details
+                  </p>
                 </div>
               </div>
             </div>
