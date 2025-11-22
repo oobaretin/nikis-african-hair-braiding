@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -90,7 +90,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const serviceDuration = getServiceDuration();
 
   // Fetch availability when date changes
-  const fetchAvailability = async (date: string) => {
+  const fetchAvailability = useCallback(async (date: string) => {
     if (!date || !serviceDuration) {
       setAvailableSlots([]);
       return;
@@ -115,7 +115,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     } finally {
       setLoadingAvailability(false);
     }
-  };
+  }, [serviceDuration]);
 
   // Watch for date changes
   const watchedDate = watch('preferredDate');
@@ -124,7 +124,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setSelectedDate(watchedDate);
       fetchAvailability(watchedDate);
     }
-  }, [watchedDate, serviceDuration]);
+  }, [watchedDate, selectedDate, serviceDuration, fetchAvailability]);
 
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
