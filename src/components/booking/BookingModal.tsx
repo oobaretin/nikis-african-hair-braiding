@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -32,8 +32,8 @@ interface BookingModalProps {
 }
 
 const timeSlots = [
-  '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
-  '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
+  '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+  '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'
 ];
 
 export const BookingModal: React.FC<BookingModalProps> = ({
@@ -42,6 +42,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   selectedService
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [loadingAvailability, setLoadingAvailability] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string>('');
 
   const {
     register,
@@ -86,39 +89,99 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const serviceDuration = getServiceDuration();
 
+  // Fetch availability when date changes
+  const fetchAvailability = async (date: string) => {
+    if (!date || !serviceDuration) {
+      setAvailableSlots([]);
+      return;
+    }
+
+    setLoadingAvailability(true);
+    try {
+      const response = await fetch(
+        `/api/bookings/availability?date=${date}&duration=${serviceDuration}`
+      );
+      const result = await response.json();
+      
+      if (response.ok) {
+        setAvailableSlots(result.availableSlots || []);
+      } else {
+        console.error('Error fetching availability:', result.error);
+        setAvailableSlots(timeSlots); // Fallback to all slots
+      }
+    } catch (error) {
+      console.error('Error fetching availability:', error);
+      setAvailableSlots(timeSlots); // Fallback to all slots
+    } finally {
+      setLoadingAvailability(false);
+    }
+  };
+
+  // Watch for date changes
+  const watchedDate = watch('preferredDate');
+  useEffect(() => {
+    if (watchedDate && watchedDate !== selectedDate && serviceDuration) {
+      setSelectedDate(watchedDate);
+      fetchAvailability(watchedDate);
+    }
+  }, [watchedDate, serviceDuration]);
+
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
       // Prepare booking data
       const bookingData = {
-        ...data,
-        serviceDetails: isServiceMenuService ? {
-          category: serviceMenuData?.[0],
-          subcategory: serviceMenuData?.[1],
-          variation: serviceMenuData?.[2],
-          fullServiceName: selectedService
-        } : {
-          serviceId: data.serviceId,
-          serviceName: selectedServiceData?.name
-        }
+        clientName: data.clientName,
+        clientEmail: data.clientEmail,
+        clientPhone: data.clientPhone,
+        preferredDate: data.preferredDate,
+        preferredTime: data.preferredTime,
+        serviceId: data.serviceId,
+        serviceName: isServiceMenuService 
+          ? selectedService 
+          : selectedServiceData?.name,
+        duration: serviceDuration || '2 hours',
+        paymentMethod: data.paymentMethod,
+        notes: data.notes,
       };
-      
-      console.log('Booking submitted:', bookingData);
+
+      // Submit booking to API
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          // Conflict - time slot already booked
+          alert(result.error || 'This time slot is no longer available. Please select another time.');
+          // Refresh availability
+          if (data.preferredDate) {
+            await fetchAvailability(data.preferredDate);
+          }
+          return;
+        }
+        throw new Error(result.error || 'Failed to book appointment');
+      }
       
       // Reset form and close modal
       reset();
+      setSelectedDate('');
+      setAvailableSlots([]);
       onClose();
       
-      // Show success message (you could use a toast notification here)
+      // Show success message
       alert('Appointment booked successfully! We will contact you to confirm.');
       
     } catch (error) {
       console.error('Booking error:', error);
-      alert('There was an error booking your appointment. Please try again.');
+      alert(error instanceof Error ? error.message : 'There was an error booking your appointment. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -340,31 +403,59 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         {errors.preferredDate && (
                           <p className="text-red-600 text-sm mt-1">{errors.preferredDate.message}</p>
                         )}
+                        {loadingAvailability && watchedDate && (
+                          <p className="text-primary-600 text-sm mt-2">Checking availability...</p>
+                        )}
                       </div>
                       
                       <div>
                         <label className="block text-sm font-medium text-secondary-700 mb-2">
                           Preferred Time *
                         </label>
+                        {watchedDate && availableSlots.length === 0 && !loadingAvailability && (
+                          <div className="mb-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <p className="text-yellow-800 text-sm">
+                              ⚠️ No available slots for this date. Please select another date.
+                            </p>
+                          </div>
+                        )}
+                        {watchedDate && availableSlots.length > 0 && (
+                          <p className="text-sm text-secondary-600 mb-2">
+                            Available slots: {availableSlots.length} of {timeSlots.length}
+                          </p>
+                        )}
                         <div className="grid grid-cols-3 gap-2">
-                          {timeSlots.map((time) => (
-                            <label
-                              key={time}
-                              className={`relative cursor-pointer rounded-lg border-2 p-3 text-center transition-all duration-200 ${
-                                watch('preferredTime') === time
-                                  ? 'border-primary-500 bg-primary-50 text-primary-700'
-                                  : 'border-secondary-200 hover:border-secondary-300'
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                value={time}
-                                {...register('preferredTime')}
-                                className="sr-only"
-                              />
-                              {time}
-                            </label>
-                          ))}
+                          {timeSlots.map((time) => {
+                            const isAvailable = !watchedDate || availableSlots.includes(time);
+                            const isSelected = watch('preferredTime') === time;
+                            
+                            return (
+                              <label
+                                key={time}
+                                className={`relative rounded-lg border-2 p-3 text-center transition-all duration-200 ${
+                                  !isAvailable
+                                    ? 'border-red-200 bg-red-50 text-red-400 cursor-not-allowed opacity-60'
+                                    : isSelected
+                                    ? 'border-primary-500 bg-primary-50 text-primary-700 cursor-pointer'
+                                    : 'border-secondary-200 hover:border-secondary-300 cursor-pointer'
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  value={time}
+                                  {...register('preferredTime')}
+                                  className="sr-only"
+                                  disabled={!isAvailable}
+                                />
+                                <div className="flex items-center justify-center space-x-1">
+                                  <span>{time}</span>
+                                  {!isAvailable && (
+                                    <span className="text-xs">✗</span>
+                                  )}
+                                </div>
+                              </label>
+                            );
+                          })}
                         </div>
                         {errors.preferredTime && (
                           <p className="text-red-600 text-sm mt-1">{errors.preferredTime.message}</p>
