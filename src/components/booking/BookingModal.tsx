@@ -481,9 +481,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       <h3 className="font-semibold text-lg text-secondary-900 border-b border-secondary-200 pb-2">
                         Preferred Payment Method *
                       </h3>
-                      <p className="text-sm text-secondary-600 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-                        <span className="font-semibold text-amber-800">$20 deposit required</span> to secure your appointment. Remaining balance due at your visit.
-                      </p>
                       
                       <div className="grid grid-cols-1 gap-4">
                         {/* Cash Option */}
@@ -579,9 +576,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                             <div className="flex-1">
                               <h4 className="font-bold text-lg text-secondary-900">PayPal</h4>
                               <p className="text-sm text-secondary-600 mt-1">Pay deposit securely with PayPal</p>
-                              <div className="flex items-center mt-2">
-                                <div className="w-2 h-2 bg-[#003087] rounded-full mr-2"></div>
-                                <span className="text-xs text-[#003087] font-medium">Secure Online Payment</span>
+                              <div className="flex items-center mt-2 flex-wrap gap-x-3 gap-y-1">
+                                <div className="flex items-center">
+                                  <div className="w-2 h-2 bg-[#003087] rounded-full mr-2"></div>
+                                  <span className="text-xs text-[#003087] font-medium">Secure Online Payment</span>
+                                </div>
+                                <span className="text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">$20 deposit required</span>
                               </div>
                             </div>
                             {watch('paymentMethod') === 'paypal' && (
