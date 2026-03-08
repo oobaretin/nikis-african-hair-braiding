@@ -9,13 +9,25 @@ import {
   EyeIcon 
 } from '@heroicons/react/24/outline';
 
-// Gallery images data - Empty until images are added
+// Gallery images - hair braiding portfolio
 const galleryImages: Array<{
   id: number;
   src: string;
   alt: string;
   description: string;
-}> = [];
+}> = [
+  { id: 1, src: '/images/1970103243606062618.JPG', alt: 'African Hair Braiding', description: 'Beautiful braided style by Niki\'s' },
+  { id: 2, src: '/images/5419616989891138872.PNG', alt: 'Boho Braids', description: 'Elegant boho braids' },
+  { id: 3, src: '/images/609472777752946375.JPG', alt: 'Box Braids', description: 'Classic box braids' },
+  { id: 4, src: '/images/8017609348311597846.JPG', alt: 'Hair Braiding Style', description: 'Professional braiding work' },
+  { id: 5, src: '/images/8170572725844401819.JPG', alt: 'Braided Hairstyle', description: 'Stylish braids by Niki\'s' },
+  { id: 6, src: '/images/824266558986917860.JPG', alt: 'African Braids', description: 'Neat and beautiful braids' },
+  { id: 7, src: '/images/spring-twist-braids.png', alt: 'Spring Twist Braids', description: 'Medium spring twist braids with rich brown tones' },
+  { id: 8, src: '/images/micro-braids-curly.png', alt: 'Micro Braids & Curly Hair', description: 'Micro braids with flowing curly waves' },
+  { id: 9, src: '/images/curly-hair-style.png', alt: 'Defined Curly Hair', description: 'Voluminous, healthy curly hair' },
+  { id: 10, src: '/images/cornrows-box-braids.png', alt: 'Cornrows to Box Braids', description: 'Cornrows transitioning to box braids with curly extensions' },
+  { id: 11, src: '/images/cornrows-braids-beads.png', alt: 'Cornrows with Beads', description: 'Intricate cornrows and box braids with decorative beads' },
+];
 
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
