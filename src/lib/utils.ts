@@ -14,7 +14,9 @@ export function formatPrice(price: number): string {
 
 export function formatPhoneNumber(phone: string): string {
   const cleaned = phone.replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+  // Handle US numbers with country code (11 digits starting with 1)
+  const digits = cleaned.length === 11 && cleaned.startsWith('1') ? cleaned.slice(1) : cleaned;
+  const match = digits.match(/^(\d{3})(\d{3})(\d{4})$/);
   if (match) {
     return `(${match[1]}) ${match[2]}-${match[3]}`;
   }

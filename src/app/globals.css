@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Boldonse:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kablammo&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,10 +8,20 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   
   body {
     @apply font-sans text-secondary-900 antialiased;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent iOS zoom on input focus when font-size < 16px */
+  @media (max-width: 768px) {
+    input, select, textarea {
+      font-size: 16px;
+    }
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -47,6 +58,14 @@
     font-family: "Boldonse", system-ui;
     font-weight: 400;
     font-style: normal;
+  }
+  
+  .font-kablammo {
+    font-family: "Kablammo", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "MORF" 0;
   }
   
   .card-hover {

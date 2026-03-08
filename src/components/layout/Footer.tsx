@@ -13,18 +13,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center mb-4">
-              <div className="h-40 md:h-32 w-auto min-w-[220px] md:min-w-0">
-                <img 
-                  src="/images/6383B831-AD0A-49E3-87EA-02AD4B1AFB8B-removebg-preview.png" 
-                  alt="Magic Braiding Logo" 
-                  className="h-full w-full object-contain"
-                />
-              </div>
+            <Link href="/" className="font-display font-bold text-xl text-white hover:text-primary-400 transition-colors mb-4 inline-block">
+              Niki&apos;s African Hair Braiding
             </Link>
             <p className="text-secondary-300 mb-6">
-              Transform your look with expert hair braiding services. Fast, professional, 
-              and gentle braiding in Richmond, Texas.
+              African hair braiding and boho hair services in Katy, Texas. Fast, professional, 
+              and gentle braiding.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => {
@@ -159,7 +153,7 @@ export const Footer: React.FC = () => {
         {/* Business Hours */}
         <div className="mt-12 pt-8 border-t border-secondary-800">
           <h3 className="font-display font-semibold text-lg mb-4">Business Hours</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {contactInfo.hours.map((hours) => (
               <div key={hours.day} className="text-center">
                 <p className="font-medium text-white">{hours.day}</p>
@@ -181,7 +175,7 @@ export const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-secondary-800 text-center">
           <p className="text-secondary-400">
-            © {new Date().getFullYear()} Magic Braiding. All rights reserved.
+            © {new Date().getFullYear()} Niki&apos;s African Hair Braiding. All rights reserved.
           </p>
           <p className="text-secondary-500 text-sm mt-2">
             Designed by{' '}

@@ -195,8 +195,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto overscroll-contain">
+          <div className="flex min-h-full items-center justify-center p-4 sm:p-6">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -211,7 +211,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl"
+              className="relative w-full max-w-2xl mx-auto"
             >
               <Card className="max-h-[90vh] overflow-y-auto shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
                 <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-primary-50 to-primary-100 border-b border-primary-200">

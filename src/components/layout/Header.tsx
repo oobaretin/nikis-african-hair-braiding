@@ -34,18 +34,15 @@ export const Header: React.FC = () => {
       className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300"
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-52 md:h-48">
-          {/* Logo and Navigation Group */}
+        <div className="flex items-center justify-between h-24 md:h-28">
+          {/* Brand and Navigation Group */}
           <div className="flex items-center gap-4 md:gap-8">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <div className="h-52 md:h-48 w-auto min-w-[250px] md:min-w-0">
-                <img 
-                  src="/images/6383B831-AD0A-49E3-87EA-02AD4B1AFB8B-removebg-preview.png" 
-                  alt="Magic Braiding Logo" 
-                  className="h-full w-full object-contain"
-                />
-              </div>
+            <Link href="/" className="flex items-center flex-shrink-0">
+              <img 
+                src="/images/no%20background.png" 
+                alt="Niki's African Hair Braiding" 
+                className="h-20 md:h-24 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -79,10 +76,11 @@ export const Header: React.FC = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button - 44px min touch target */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg transition-colors duration-200 text-secondary-700 hover:bg-secondary-100"
+            className="md:hidden p-3 -m-1 rounded-lg transition-colors duration-200 text-secondary-700 hover:bg-secondary-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
             {isOpen ? (
               <XMarkIcon className="h-6 w-6" />

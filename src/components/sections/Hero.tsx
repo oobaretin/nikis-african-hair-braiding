@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export const Hero: React.FC = () => {
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-52 md:pt-48">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-32 pb-24">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-primary-600 z-10" />
@@ -23,17 +23,17 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight">
-            Magic Braiding
-            <span className="block text-primary-200">Professional Hair Braiding Services</span>
+          <h1 className="font-kablammo text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight">
+            Niki&apos;s African Hair Braiding
+            <span className="block text-primary-200">African Hair Braiding & Boho Hair</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Fast, professional, and gentle hair braiding services in Richmond, Texas. 
-            Beautiful, long-lasting braids that enhance your natural beauty. Experience the magic!
+            Fast, professional, and gentle hair braiding services in Katy, Texas. 
+            Beautiful African braids and boho styles that enhance your natural beauty.
           </p>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-16">
             <Link href="/services">
               <Button 
                 size="lg" 
@@ -44,24 +44,24 @@ export const Hero: React.FC = () => {
             </Link>
           </div>
 
-          {/* Trust Indicators */}
+          {/* Trust Indicators - inline with content, spaced from scroll */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto"
+            className="grid grid-cols-3 gap-6 md:gap-12 max-w-2xl mx-auto"
           >
             <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-2">20+</div>
-              <div className="text-white/80">Years Experience</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">20+</div>
+              <div className="text-white/80 text-sm mt-1">Years</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-2">1000+</div>
-              <div className="text-white/80">Happy Clients</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">1000+</div>
+              <div className="text-white/80 text-sm mt-1">Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-2">5★</div>
-              <div className="text-white/80">Average Rating</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">5★</div>
+              <div className="text-white/80 text-sm mt-1">Rating</div>
             </div>
           </motion.div>
         </motion.div>

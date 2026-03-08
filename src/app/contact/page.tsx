@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 import { Contact } from '@/components/sections/Contact';
 
 export const metadata: Metadata = {
-  title: 'Contact Us - Magic Braiding | Book Your Appointment in Richmond, Texas',
-  description: 'Contact Magic Braiding to book your hair braiding appointment. Located in Richmond, Texas. Call (832) 526-7055 or send us a message.',
-  keywords: 'contact magic braiding, book appointment, Richmond Texas, hair braiding salon contact',
+  title: "Contact Us - Niki's African Hair Braiding | Book Your Appointment in Katy, Texas",
+  description: "Contact Niki's African Hair Braiding to book your appointment. Located in Katy, Texas. Call (281) 408-3091 or send us a message.",
+  keywords: "contact Niki's African hair braiding, book appointment, Katy Texas, hair braiding salon contact",
 };
 
 export default function ContactPage() {
   return (
-    <div className="pt-52 md:pt-48">
+    <div className="pt-28 md:pt-32">
       <Contact />
     </div>
   );

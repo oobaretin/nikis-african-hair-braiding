@@ -2,35 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  HeartIcon, 
-  UserGroupIcon, 
-  SparklesIcon,
-  ShieldCheckIcon 
-} from '@heroicons/react/24/outline';
-
-const features = [
-  {
-    icon: HeartIcon,
-    title: 'Passion for Beauty',
-    description: 'We believe every client deserves to feel beautiful and confident in their own skin.'
-  },
-  {
-    icon: UserGroupIcon,
-    title: 'Expert Team',
-    description: 'Our skilled professionals have years of experience in hair braiding and styling.'
-  },
-  {
-    icon: SparklesIcon,
-    title: 'Premium Quality',
-    description: 'We use only the highest quality hair extensions and professional-grade products.'
-  },
-  {
-    icon: ShieldCheckIcon,
-    title: 'Safe & Clean',
-    description: 'Our salon maintains the highest standards of cleanliness and safety protocols.'
-  }
-];
 
 export const About: React.FC = () => {
   return (
@@ -46,21 +17,21 @@ export const About: React.FC = () => {
             className="text-center"
           >
             <h2 className="font-bold text-4xl md:text-5xl text-secondary-900 mb-6">
-              About Magic Braiding
+              About Niki&apos;s African Hair Braiding
             </h2>
             
             <p className="text-lg text-secondary-600 mb-6 leading-relaxed">
-              Led by Stella, a professional braider with years of experience, Magic Braiding is 
-              committed to delivering exceptional hair braiding services designed to enhance and 
-              celebrate your natural beauty. We prioritize quality, speed, and gentleness to ensure 
-              every client leaves satisfied and beautiful.
+              Niki&apos;s African hair braiding and boho hair seller is led by Niki, a professional 
+              braider with years of experience, committed to delivering exceptional African hair 
+              braiding and boho styles designed to enhance and celebrate your natural beauty. 
+              We prioritize quality, speed, and gentleness to ensure every client leaves satisfied and beautiful.
             </p>
             
             <p className="text-lg text-secondary-600 mb-8 leading-relaxed">
-              We are Professional Braiders with years of experience. Our happiness is 
+              We are professional braiders with years of experience. Our happiness is 
               the customer happiness. Every appointment is an opportunity to create something 
               beautiful that reflects your unique style and personality, backed by expertise 
-              and genuine care for our clients. Fast, neat, and gentle - that&apos;s the Magic Braiding promise.
+              and genuine care for our clients. Fast, neat, and gentle - that&apos;s the Niki&apos;s promise.
             </p>
 
             {/* Stats */}
@@ -78,46 +49,6 @@ export const About: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Features Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className="text-center mb-12">
-            <h3 className="font-display font-semibold text-3xl text-secondary-900 mb-4">
-              Why Choose Us
-            </h3>
-            <p className="text-lg text-secondary-600 max-w-2xl mx-auto">
-              We&apos;re committed to providing exceptional service and results that exceed your expectations.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-primary-600" />
-                </div>
-                <h4 className="font-semibold text-lg text-secondary-900 mb-2">
-                  {feature.title}
-                </h4>
-                <p className="text-secondary-600 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

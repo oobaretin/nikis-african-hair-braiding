@@ -1,6 +1,13 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { BookingProvider } from '@/components/booking/BookingProvider';
@@ -8,32 +15,32 @@ import { BookingProvider } from '@/components/booking/BookingProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Magic Braiding - Professional Hair Braiding Services in Richmond, Texas',
-  description: 'Transform your look with expert hair braiding services at Magic Braiding. Located in Richmond, Texas. Fast, professional, and gentle braiding. Book your appointment today!',
-  keywords: 'hair braiding, braids, Richmond Texas, hair salon, professional braiding, protective styles, box braids, knotless braids, cornrows, Stella',
-  authors: [{ name: 'Magic Braiding' }],
-  creator: 'Magic Braiding',
-  publisher: 'Magic Braiding',
+  title: "Niki's African Hair Braiding - African Braids & Boho Hair in Katy, Texas",
+  description: "Niki's African hair braiding and boho hair seller. Expert African braids and boho styles in Katy, Texas. Fast, professional, and gentle. Book your appointment today!",
+  keywords: 'African hair braiding, boho hair, braids, Katy Texas, hair salon, professional braiding, protective styles, box braids, knotless braids, cornrows, Niki',
+  authors: [{ name: "Niki's African Hair Braiding" }],
+  creator: "Niki's African Hair Braiding",
+  publisher: "Niki's African Hair Braiding",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.magicbraiding.com'),
+  metadataBase: new URL('https://www.nikisafricanhair.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Magic Braiding - Professional Hair Braiding Services in Richmond, Texas',
-    description: 'Transform your look with expert hair braiding services at Magic Braiding. Fast, professional, and gentle braiding.',
-    url: 'https://www.magicbraiding.com',
-    siteName: 'Magic Braiding',
+    title: "Niki's African Hair Braiding - African Braids & Boho Hair in Katy, Texas",
+    description: "Niki's African hair braiding and boho hair seller. Expert African braids and boho styles. Fast, professional, and gentle braiding.",
+    url: 'https://www.nikisafricanhair.com',
+    siteName: "Niki's African Hair Braiding",
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Magic Braiding - Professional Hair Braiding Services',
+        alt: "Niki's African Hair Braiding - African Braids & Boho Hair",
       },
     ],
     locale: 'en_US',
@@ -41,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Magic Braiding - Professional Hair Braiding Services in Richmond, Texas',
-    description: 'Transform your look with expert hair braiding services at Magic Braiding. Fast, professional, and gentle braiding.',
+    title: "Niki's African Hair Braiding - African Braids & Boho Hair in Katy, Texas",
+    description: "Niki's African hair braiding and boho hair seller. Expert African braids and boho styles. Fast, professional, and gentle braiding.",
     images: ['/og-image.jpg'],
   },
   robots: {
