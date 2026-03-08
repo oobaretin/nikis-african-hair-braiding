@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -480,6 +481,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       <h3 className="font-semibold text-lg text-secondary-900 border-b border-secondary-200 pb-2">
                         Preferred Payment Method *
                       </h3>
+                      <p className="text-sm text-secondary-600 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
+                        <span className="font-semibold text-amber-800">$20 deposit required</span> to secure your appointment. Remaining balance due at your visit.
+                      </p>
                       
                       <div className="grid grid-cols-1 gap-4">
                         {/* Cash Option */}
@@ -550,35 +554,37 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           </div>
                         </label>
 
-                        {/* CashApp Option */}
+                        {/* PayPal Option */}
                         <label className={`relative cursor-pointer rounded-xl border-2 p-5 transition-all duration-300 transform hover:scale-[1.02] ${
-                          watch('paymentMethod') === 'cashapp'
+                          watch('paymentMethod') === 'paypal'
                             ? 'border-primary-500 bg-gradient-to-r from-primary-50 to-primary-100 shadow-lg'
                             : 'border-secondary-200 hover:border-primary-300 hover:shadow-md bg-white'
                         }`}>
                           <input
                             type="radio"
-                            value="cashapp"
+                            value="paypal"
                             {...register('paymentMethod')}
                             className="sr-only"
                           />
                           <div className="flex items-center space-x-4">
-                            <div className="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center p-2">
-                              <img 
-                                src="/images/cashapp.logo1.png" 
-                                alt="CashApp" 
-                                className="w-full h-full object-contain"
+                            <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                              <Image
+                                src="/images/paypal-logo.png"
+                                alt="PayPal"
+                                width={48}
+                                height={48}
+                                className="object-contain"
                               />
                             </div>
                             <div className="flex-1">
-                              <h4 className="font-bold text-lg text-secondary-900">CashApp</h4>
-                              <p className="text-sm text-secondary-600 mt-1">Send to: [Your CashApp Info]</p>
+                              <h4 className="font-bold text-lg text-secondary-900">PayPal</h4>
+                              <p className="text-sm text-secondary-600 mt-1">Pay deposit securely with PayPal</p>
                               <div className="flex items-center mt-2">
-                                <div className="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-                                <span className="text-xs text-primary-600 font-medium">Mobile Payment</span>
+                                <div className="w-2 h-2 bg-[#003087] rounded-full mr-2"></div>
+                                <span className="text-xs text-[#003087] font-medium">Secure Online Payment</span>
                               </div>
                             </div>
-                            {watch('paymentMethod') === 'cashapp' && (
+                            {watch('paymentMethod') === 'paypal' && (
                               <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center">
                                 <div className="w-2 h-2 bg-white rounded-full"></div>
                               </div>
